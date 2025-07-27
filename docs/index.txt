@@ -1,0 +1,12 @@
+npx react-native run-android
+npx react-native start
+
+
+npm run android
+
+
+change java sdk -v
+sudo update-alternatives --config javac
+
+
+mmkdir -p src/lib && touch src/lib/supabase.js
