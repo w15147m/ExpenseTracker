@@ -3,10 +3,12 @@ npx react-native start
 
 
 npm run android
+npx react-native start --reset-cache
+
 
 
 change java sdk -v
 sudo update-alternatives --config javac
 
 
-mmkdir -p src/lib && touch src/lib/supabase.js
+mkdir -p src/navigation && touch src/navigation/AppNavigator.js
