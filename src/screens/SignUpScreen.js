@@ -2,29 +2,31 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
-const LoginScreen = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
 
-  const handleSignIn = async () => {
+  const handleSignUp = async () => {
     if (!email || !password) {
       Alert.alert('Error', 'Please enter both email and password.');
       return;
     }
     setLoading(true);
-    const { error } = await signIn(email, password);
+    const { error } = await signUp(email, password);
     if (error) {
-      Alert.alert('Sign In Error', error.message);
+      Alert.alert('Sign Up Error', error.message);
+    } else {
+      // Supabase sends a confirmation email by default.
+      Alert.alert('Success', 'Please check your email to confirm your sign up!');
     }
-    // No need for a success message, the navigator will switch screens automatically
     setLoading(false);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
+      <Text style={styles.title}>Create Account</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -43,18 +45,17 @@ const LoginScreen = ({ navigation }) => {
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <Button title="Sign In" onPress={handleSignIn} />
+        <Button title="Sign Up" onPress={handleSignUp} />
       )}
       <View style={styles.switchContainer}>
-        <Text>Don't have an account? </Text>
-        <Text style={styles.link} onPress={() => navigation.navigate('SignUp')}>
-          Sign Up
+        <Text>Already have an account? </Text>
+        <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
+          Sign In
         </Text>
       </View>
     </View>
   );
 };
-
 
 // Add this StyleSheet to all three screen files
 const styles = StyleSheet.create({
@@ -93,4 +94,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-export default LoginScreen;
+export default SignUpScreen;

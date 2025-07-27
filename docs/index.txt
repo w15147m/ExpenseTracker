@@ -11,4 +11,4 @@ change java sdk -v
 sudo update-alternatives --config javac
 
 
-mkdir -p src/navigation && touch src/navigation/AppNavigator.js
+mkdir -p src/screens && touch src/screens/LoginScreen.js
